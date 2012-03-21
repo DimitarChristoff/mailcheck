@@ -105,7 +105,7 @@
                 return false
 
             domainBit = parts.pop()
-            userBit = parts.join('')
+            userBit = parts.join('@')
 
             closestDomain = this.findClosestDomain(domainBit)
 
