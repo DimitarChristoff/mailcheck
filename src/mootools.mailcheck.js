@@ -65,7 +65,6 @@
                 'o2.pl',
                 'onetel.com',
                 'orange.net',
-                'qmetric.co.uk',
                 'rocketmail.com',
                 'sky.com',
                 'supanet.com',
