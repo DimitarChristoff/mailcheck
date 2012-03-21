@@ -16,9 +16,7 @@
  requires:
  - Core/String
  - String.distance
- - Core/Event
  - Core/Element
- - Core/Array
  - Core/Class
 
  provides: Mailcheck
