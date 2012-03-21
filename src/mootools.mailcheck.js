@@ -28,8 +28,6 @@
 
 !function() {
 
-    'use strict'
-
     var Mailcheck = this.Mailcheck = new Class({
 
         Implements: [Options,Events],
