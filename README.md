@@ -1,88 +1,104 @@
-mailcheck.js
-=========
+mootools.mailcheck.js
+=====================
 
-A jQuery plugin that suggests a right domain when your users misspell it in an email address.
+A port of a jQuery plugin that suggests a right domain when your users misspell it in an email address.
 
 What does it do?
 ----------------
 
 When your user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail.com".
 
-At [Kicksend](http://kicksend.com), we use Mailcheck to help reduce typos in email addresses during sign ups.
-
 ![diagram](http://github.com/Kicksend/mailcheck/raw/master/doc/example.png?raw=true)
 
-See it live in action [here](http://kicksend.com/join).
+See it live in action [here](http://jsfiddle.net/dimitar/jSn3e/).
 
-Installation
-------------
-
-- For instant use, download `src/jquery.mailcheck.min.js` into javascripts directory. Use `src/jquery.mailcheck.js` if you want to hack on it, or you are using your own minimizer.
-
-- For hacking, fork the repo or git clone it.
 
 Usage
 -----
-First, include jQuery and Mailcheck into the page.
 
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.mailcheck.min.js"></script>
+This is low level, it works with an element but it does not attach events or handle suggestions.
+You should extend the class to get that behavior or work with the instance.
 
-Have a text field.
+Get Mootools. Have a text field.
 
-    <input id="email" name="email" type="text" />
+    <input id="email" name="email" type="text" value="dimitar@gogolemail.com" />
 
 Now, attach Mailcheck to the text field. Remember to declare an array of domains you want to check against.
 
-    <script type="text/javascript">
-      var domains = ['hotmail.com', 'gmail.com', 'aol.com'];
+```javascript
+    // it can create an instance on the fly for you
+    var suggested = document.id("email").get("mailcheck").suggest();
+    if (suggested) {
+        // do something with the object
+    }
+    else {
+        // we have nothing!
+    }
+```
 
-      $('input#email').mailcheck(domains, {
-        suggested: function(element, suggestion) {
-          // callback code
-        },
-        empty: function(element) {
-          // callback code
+or use a proper class instantiation as part of scripting:
+
+```javascript
+    // it can create an instance on the fly for you
+    var mailcheck = new Mailcheck(, {
+        domains: ["hotmail.com", "gmail.com", "aol.com"],
+        threshold: 2
+    });
+
+    document.id("email").addEvent("change", function() {
+        var suggested = mailcheck.suggest();
+        if (suggested) {
+            // do something with the object
         }
-      })
-    </script>
+        else {
+            // we have nothing!
+        }
+    });
+```
 
-Mailcheck takes in two callbacks, `suggested` and `empty`. We recommend you supply both.
+a combination of both for quick scripting:
 
-`suggested` is called when there's a suggestion. Mailcheck passes in the target element and the suggestion. The suggestion is an object with the following members:
+```javascript
+    document.id("email").addEvent("change", function() {
+        // create a class instance if it does not exist...
+        var suggested = this.get("mailcheck").suggest();
+        if (suggested) {
+            // do something with the object
+        }
+        else {
+            // we have nothing!
+        }
+    });
+```
+
+
+`suggested` is an object with the following members:
 
     {
-      address: 'test',          // the address; part before the @ sign
-      domain: 'hotmail.com',    // the suggested domain
-      full: 'test@hotmail.com'  // the full suggested email
+      address: 'dimitar',            // the address; part before the @ sign
+      domain: 'googlemail.com',      // the suggested domain
+      full: 'dimitar@googlemail.com' // the full suggested email
     }
 
-`empty` is called when there's no suggestion. Mailcheck just passes in the target element.
-
-You can use the callbacks to display the appropriate visual feedback to the user.
+`false` is returned when we don't know what to suggest.
 
 Customization
 -------------
-The Mailcheck jQuery plugin wraps Kicksend.mailcheck. The prime candidates for customization are the methods
-`Kicksend.mailcheck.findClosestDomain` and `Kicksend.mailcheck.stringDistance`.
-
 Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity algorithm by [Siderite](http://siderite.blogspot.com/).
 
-Since Mailcheck is a client-side operation, keep in mind file size, memory usage, and performance.
 
-Tests
------
 
-Mailcheck is tested with [Jasmine](http://pivotal.github.com/jasmine/). Load `spec/spec_runner.html` in your browser to run the tests.
+Tests (to do)
+-------------
 
-Author
--------
+Moving to Buster.js
+
+Original Author
+---------------
 
 Derrick Ko ([@derrickko](http://twitter.com/derrickko))
 
 License
 -------
-
-Copyright (c) 2012 [Receivd, Inc.](http://kicksend.com)
 
 Licensed under the MIT License.
