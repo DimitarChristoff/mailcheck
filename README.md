@@ -10,7 +10,7 @@ When your user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail
 
 ![diagram](http://github.com/Kicksend/mailcheck/raw/master/doc/example.png?raw=true)
 
-See it live in action [here](http://jsfiddle.net/dimitar/jSn3e/).
+See it live in action on this jsfiddle [here](http://jsfiddle.net/dimitar/jSn3e/).
 
 
 Usage
@@ -21,54 +21,56 @@ You should extend the class to get that behavior or work with the instance.
 
 Get Mootools. Have a text field.
 
-    <input id="email" name="email" type="text" value="dimitar@gogolemail.com" />
+```html
+<input id="email" name="email" type="text" value="dimitar@gogolemail.com" />
+```
 
 Now, attach Mailcheck to the text field. Remember to declare an array of domains you want to check against.
 
 ```javascript
-    // it can create an instance on the fly for you
-    var suggested = document.id("email").get("mailcheck").suggest();
+// it can create an instance on the fly for you
+var suggested = document.id("email").get("mailcheck").suggest();
+if (suggested) {
+    // do something with the object
+}
+else {
+    // we have nothing!
+}
+```
+
+or use a proper class instantiation as part of scripting:
+
+```javascript
+// it can create an instance on the fly for you
+var mailcheck = new Mailcheck(, {
+    domains: ["hotmail.com", "gmail.com", "aol.com"],
+    threshold: 2
+});
+
+document.id("email").addEvent("change", function() {
+    var suggested = mailcheck.suggest();
     if (suggested) {
         // do something with the object
     }
     else {
         // we have nothing!
     }
-```
-
-or use a proper class instantiation as part of scripting:
-
-```javascript
-    // it can create an instance on the fly for you
-    var mailcheck = new Mailcheck(, {
-        domains: ["hotmail.com", "gmail.com", "aol.com"],
-        threshold: 2
-    });
-
-    document.id("email").addEvent("change", function() {
-        var suggested = mailcheck.suggest();
-        if (suggested) {
-            // do something with the object
-        }
-        else {
-            // we have nothing!
-        }
-    });
+});
 ```
 
 a combination of both for quick scripting:
 
 ```javascript
-    document.id("email").addEvent("change", function() {
-        // create a class instance if it does not exist...
-        var suggested = this.get("mailcheck").suggest();
-        if (suggested) {
-            // do something with the object
-        }
-        else {
-            // we have nothing!
-        }
-    });
+document.id("email").addEvent("change", function() {
+    // create a class instance if it does not exist...
+    var suggested = this.get("mailcheck").suggest();
+    if (suggested) {
+        // do something with the object
+    }
+    else {
+        // we have nothing!
+    }
+});
 ```
 
 
@@ -85,7 +87,6 @@ a combination of both for quick scripting:
 Customization
 -------------
 Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity algorithm by [Siderite](http://siderite.blogspot.com/).
-
 
 
 Tests (to do)
