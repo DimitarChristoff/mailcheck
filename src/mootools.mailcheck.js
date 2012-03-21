@@ -119,10 +119,8 @@
                 i = 0,
                 len = domains.length
 
-            if (domains.contains(domain))
-                return false;
-
             for (;i < len; ++i) {
+                if (domain === domains[i]) return false
                 dist = String.distance(domain, domains[i])
                 dist < minDist && (minDist = dist) && (closestDomain = domains[i])
             }
