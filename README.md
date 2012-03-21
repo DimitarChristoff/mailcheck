@@ -13,8 +13,8 @@ When your user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail
 See it live in action on this jsfiddle [here](http://jsfiddle.net/dimitar/jSn3e/).
 
 
-Usage
------
+How to use
+----------
 
 This is low level, it works with an element but it does not attach events or handle suggestions.
 You should extend the class to get that behavior or work with the instance.
