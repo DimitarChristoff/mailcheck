@@ -30,7 +30,7 @@
 
     var Mailcheck = this.Mailcheck = new Class({
 
-        Implements: [Options,Events],
+        Implements: [Options],
 
         options: {
             domains: [
