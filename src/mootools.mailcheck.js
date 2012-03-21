@@ -97,17 +97,22 @@
         suggest: function(){
             var value = this.element.get('value').clean(),
                 parts = value.split('@'),
-                closestDomain
+                closestDomain,
+                userBit,
+                domainBit
 
-            if (parts.length != 2)
+            if (parts.length < 2)
                 return false
 
-            closestDomain = this.findClosestDomain(parts[1])
+            domainBit = parts.pop()
+            userBit = parts.join('')
+
+            closestDomain = this.findClosestDomain(domainBit)
 
             return (closestDomain) ? {
-                address: parts[0],
+                user: userBit,
                 domain: closestDomain,
-                full: [parts[0], '@', closestDomain].join('')
+                full: [userBit, '@', closestDomain].join('')
             } : false
         },
 
