@@ -45,6 +45,16 @@ buster.testCase("mailcheck.mootools tests", {
             });
         },
 
+        "Expect an empty string not to produce results": function() {
+            this.mailcheck.element.set("value", "");
+            buster.assert.isFalse(this.mailcheck.suggest());
+        },
+
+        "Expect an incomplete email address w/o a domain part not to produce a result": function() {
+            this.mailcheck.element.set("value", "gmail.com");
+            buster.assert.isFalse(this.mailcheck.suggest());
+        },
+
         "Expect a recognised domain not to produce a suggestion (gmail.com)": function() {
             this.mailcheck.element.set("value", "test@gmail.com");
             buster.assert.isFalse(this.mailcheck.suggest());
@@ -66,6 +76,18 @@ buster.testCase("mailcheck.mootools tests", {
             });
             this.mailcheck.element.set("value", "test@gmail.org");
             buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
+        },
+
+        "Expect uppercase user input not to matter to suggestions": function() {
+            this.mailcheck.element.set("value", "TEST@HOTNAIL.COM");
+            buster.assert.equals(this.mailcheck.suggest()['domain'], 'hotmail.com');
+        },
+
+        "Expect obscure RFC compatible emails like \"foo@bar\"@gnail.com to produce a valid suggestion": function() {
+            this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
+            buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
         }
+
+
     }
 });
