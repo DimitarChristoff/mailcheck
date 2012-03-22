@@ -21,9 +21,7 @@ You should extend the class to get that behavior or work with the instance.
 
 Get Mootools. Have a text field.
 
-```html
-<input id="email" name="email" type="text" value="dimitar@gogolemail.com" />
-```
+    <input id="email" name="email" type="text" value="dimitar@gogolemail.com" />
 
 Now, attach Mailcheck to the text field. Remember to declare an array of domains you want to check against.
 
