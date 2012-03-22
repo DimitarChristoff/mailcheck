@@ -85,6 +85,7 @@
             threshold: 2
         },
 
+        cache: {},
 
         initialize: function(element, options){
             this.element = document.id(element)
@@ -104,7 +105,7 @@
             domainBit = parts.pop().toLowerCase()
             userBit = parts.join('@')
 
-            closestDomain = this.findClosestDomain(domainBit)
+            closestDomain = this.cache[domainBit] || this.findClosestDomain(domainBit)
 
             return (closestDomain) ? {
                 user: userBit,
@@ -119,7 +120,8 @@
                 closestDomain,
                 domains = this.options.domains,
                 i = 0,
-                len = domains.length
+                len = domains.length,
+                result = false
 
             for (;i < len; ++i) {
                 if (domain === domains[i]) return false
@@ -127,8 +129,10 @@
                 dist < minDist && (minDist = dist) && (closestDomain = domains[i])
             }
 
-            return minDist <= this.options.threshold && closestDomain ? closestDomain : false
+            if (minDist <= this.options.threshold && closestDomain)
+                this.cache[domain] = result = closestDomain
 
+            return result
         }
 
     })
