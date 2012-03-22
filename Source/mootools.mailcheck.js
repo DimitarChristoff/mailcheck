@@ -101,7 +101,7 @@
             if (parts.length < 2)
                 return false
 
-            domainBit = parts.pop()
+            domainBit = parts.pop().toLowerCase()
             userBit = parts.join('@')
 
             closestDomain = this.findClosestDomain(domainBit)
