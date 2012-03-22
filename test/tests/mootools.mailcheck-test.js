@@ -91,8 +91,13 @@ buster.testCase("mailcheck.mootools tests", {
         "Expect obscure RFC compatible emails like \"foo@bar\"@gnail.com to produce a valid suggestion": function() {
             this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
             buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
-        }
+        },
 
+        "Expect cache to store look-up for faster future reference": function() {
+            this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
+            this.mailcheck.suggest();
+            buster.assert.equals(this.mailcheck.cache['gnail.com'], 'gmail.com');
+        }
 
     }
 });

@@ -105,7 +105,7 @@
             domainBit = parts.pop().toLowerCase()
             userBit = parts.join('@')
 
-            closestDomain = this.cache[domainBit] || this.findClosestDomain(domainBit)
+            closestDomain = typeof this.cache[domainBit] !== 'undefined' ? this.cache[domainBit] : this.findClosestDomain(domainBit)
 
             return (closestDomain) ? {
                 user: userBit,
@@ -120,8 +120,9 @@
                 closestDomain,
                 domains = this.options.domains,
                 i = 0,
-                len = domains.length,
-                result = false
+                len = domains.length
+
+            this.cache[domain] = false
 
             for (;i < len; ++i) {
                 if (domain === domains[i]) return false
@@ -130,9 +131,9 @@
             }
 
             if (minDist <= this.options.threshold && closestDomain)
-                this.cache[domain] = result = closestDomain
+                this.cache[domain] = closestDomain
 
-            return result
+            return this.cache[domain]
         }
 
     })
