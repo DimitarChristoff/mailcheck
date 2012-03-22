@@ -3,6 +3,7 @@ var config = exports;
 config["Browser tests"] = {
     rootPath: "../",
     environment: "browser", // or "node"
+    libs: ['./lib/mootools-yui-compressed.js'],
     sources: [
         "src/*.js"
     ],
