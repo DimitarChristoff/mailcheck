@@ -1,3 +1,8 @@
+if (typeof require == "function" && typeof module == "object") {
+    buster = require("buster");
+}
+
+
 buster.testCase("String.distance tests", {
     setUp: function() {
         this.string = "gmail";
@@ -25,7 +30,7 @@ buster.testCase("String.distance tests", {
 
 buster.testCase("mailcheck.mootools tests", {
     setUp: function () {
-        this.mailcheck = new Mailcheck(document.id('email'));
+        this.mailcheck = new Mailcheck(new Element("input#email"));
     },
 
     "Initial object >": {
@@ -34,7 +39,7 @@ buster.testCase("mailcheck.mootools tests", {
         },
 
         "Expect element to be valid": function() {
-            buster.assert.isTrue(this.mailcheck.element == document.id('email'));
+            buster.assert.equals(this.mailcheck.element.get("id"), "email");
         }
     },
 
