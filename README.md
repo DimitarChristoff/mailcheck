@@ -77,7 +77,7 @@ document.id("email").addEvent("change", function() {
 `suggested` is an object with the following properties:
 
     {
-      address: 'dimitar',            // the address; part before the @ sign
+      user: 'dimitar',               // the address; part before the @ sign
       domain: 'googlemail.com',      // the suggested domain
       full: 'dimitar@googlemail.com' // the full suggested email
     }
