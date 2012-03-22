@@ -109,7 +109,7 @@
             return (closestDomain) ? {
                 user: userBit,
                 domain: closestDomain,
-                full: [userBit, '@', closestDomain].join('')
+                full: [userBit, closestDomain].join('@')
             } : false
         },
 
@@ -127,7 +127,7 @@
                 dist < minDist && (minDist = dist) && (closestDomain = domains[i])
             }
 
-            return minDist <= this.options.threshold && closestDomain && closestDomain !== domain ? closestDomain : false
+            return minDist <= this.options.threshold && closestDomain ? closestDomain : false
 
         }
 
