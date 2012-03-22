@@ -25,52 +25,45 @@ Get Mootools. Have a text field.
 
 Now, attach Mailcheck to the text field. Remember to declare an array of domains you want to check against.
 
-```javascript
-// it can create an instance on the fly for you
-var suggested = document.id("email").get("mailcheck").suggest();
-if (suggested) {
-    // do something with the object
-}
-else {
-    // we have nothing!
-}
-```
+    // it can create an instance on the fly for you
+    var suggested = document.id("email").get("mailcheck").suggest();
+    if (suggested) {
+        // do something with the object
+    }
+    else {
+        // we have nothing!
+    }
 
 or use a proper class instantiation as part of scripting:
 
-```javascript
-// it can create an instance on the fly for you
-var mailcheck = new Mailcheck(, {
-    domains: ["hotmail.com", "gmail.com", "aol.com"],
-    threshold: 2
-});
+    // it can create an instance on the fly for you
+    var mailcheck = new Mailcheck(, {
+        domains: ["hotmail.com", "gmail.com", "aol.com"],
+        threshold: 2
+    });
 
-document.id("email").addEvent("change", function() {
-    var suggested = mailcheck.suggest();
-    if (suggested) {
-        // do something with the object
-    }
-    else {
-        // we have nothing!
-    }
-});
-```
+    document.id("email").addEvent("change", function() {
+        var suggested = mailcheck.suggest();
+        if (suggested) {
+            // do something with the object
+        }
+        else {
+            // we have nothing!
+        }
+    });
 
 a combination of both for quick scripting:
 
-```javascript
-document.id("email").addEvent("change", function() {
-    // create a class instance if it does not exist...
-    var suggested = this.get("mailcheck").suggest();
-    if (suggested) {
-        // do something with the object
-    }
-    else {
-        // we have nothing!
-    }
-});
-```
-
+    document.id("email").addEvent("change", function() {
+        // create a class instance if it does not exist...
+        var suggested = this.get("mailcheck").suggest();
+        if (suggested) {
+            // do something with the object
+        }
+        else {
+            // we have nothing!
+        }
+    });
 
 `suggested` is an object with the following properties:
 
