@@ -95,6 +95,24 @@ Tests
 
 Via Buster.js, go to `test/index.html` to run.
 
+You can also test via node. To install buster:
+
+    # npm install -g buster
+    
+To start the static tester:    
+    
+    # buster static
+    
+To start in capture mode for multiple browsers:
+
+    # buster server &
+
+Once you have captured your target browsers, just run:
+
+    # buster test
+
+Standalone testing w/o browser capture is not supported yet, though you could probably try jsdom - edit buster.js config and give it a go. Also, you'd need the server only version of mootools.
+
 Original Author
 ---------------
 
