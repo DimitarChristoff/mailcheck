@@ -92,13 +92,7 @@ Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-
 Tests
 -----
 
-Via Buster.js, go to `test/index.html` to run. Also supported via node:
-
-    npm install buster
-
-In project folder, type:
-
-    buster test
+Via Buster.js, go to `test/index.html` to run.
 
 Original Author
 ---------------
