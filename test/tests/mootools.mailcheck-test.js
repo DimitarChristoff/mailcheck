@@ -97,7 +97,14 @@ buster.testCase("mailcheck.mootools tests", {
             this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
             this.mailcheck.suggest();
             buster.assert.equals(this.mailcheck.cache['gnail.com'], 'gmail.com');
+        },
+
+        "Expect cache to store look-up failures for faster future reference": function() {
+            this.mailcheck.element.set("value", "\"foo@bar\"@blabla.com");
+            this.mailcheck.suggest();
+            buster.assert.isFalse(this.mailcheck.cache['blabla.com']);
         }
+
 
     }
 });
