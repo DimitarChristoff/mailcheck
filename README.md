@@ -74,7 +74,7 @@ document.id("email").addEvent("change", function() {
 ```
 
 
-`suggested` is an object with the following members:
+`suggested` is an object with the following properties:
 
     {
       address: 'dimitar',            // the address; part before the @ sign
@@ -84,10 +84,11 @@ document.id("email").addEvent("change", function() {
 
 `false` is returned when we don't know what to suggest.
 
-Customization
--------------
-Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity algorithm by [Siderite](http://siderite.blogspot.com/).
+Methodology
+-----------
+Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/).
 
+As an alternative to the `String.distance` exported by `String.distance.js`, you can use [String.levenstein](http://mootools.net/forge/p/string_levenshtein), though the results may vary slightly.
 
 Tests
 -----

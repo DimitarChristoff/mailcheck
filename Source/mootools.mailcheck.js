@@ -11,7 +11,7 @@
 
  license: MIT-style license.
 
- version: 1
+ version: 1.02
 
  requires:
  - Core/String
@@ -149,7 +149,7 @@
             return mailcheck
         }
 
-    };
+    }
 
 
 }()
