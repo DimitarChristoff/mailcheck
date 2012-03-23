@@ -107,10 +107,10 @@ More details on testing in `the tests/README.md`, including examples.
 Credits
 -------
 
-Original plugin / idea by Derrick Ko ([@derrickko](http://twitter.com/derrickko))
-This mootools port entirely rewritten by Dimitar Christoff ([@D_mitar](http://twitter.com/D_mitar))
+- Original plugin / idea by Derrick Ko ([@derrickko](http://twitter.com/derrickko))
+- This mootools port entirely rewritten by Dimitar Christoff ([@D_mitar](http://twitter.com/D_mitar))
 
 License
 -------
 
-Licensed under the MIT License. You are not allowed to (use mailcheck for evil)[http://www.youtube.com/watch?v=-hCimLnIsDA]
+Licensed under the MIT License. You are not allowed to [use mailcheck for evil](http://www.youtube.com/watch?v=-hCimLnIsDA)
