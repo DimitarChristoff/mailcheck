@@ -54,7 +54,7 @@ buster.testCase("String.levenstein tests", {
 });
 
 
-buster.testCase("mailcheck.mootools distance tests", {
+buster.testCase("mootools.mailcheck distance tests", {
     setUp: function () {
         this.mailcheck = new Mailcheck(new Element("input#email"), {
             method: "distance"
@@ -119,24 +119,40 @@ buster.testCase("mailcheck.mootools distance tests", {
         "Expect obscure RFC compatible emails like \"foo@bar\"@gnail.com to produce a valid suggestion": function() {
             this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
             buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
-        },
-
-        "Expect cache to store look-up for faster future reference": function() {
-            this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
-            this.mailcheck.suggest();
-            buster.assert.equals(this.mailcheck.cache['gnail.com'], 'gmail.com');
-        },
-
-        "Expect cache to store look-up failures for faster future reference": function() {
-            this.mailcheck.element.set("value", "\"foo@bar\"@blabla.com");
-            this.mailcheck.suggest();
-            buster.assert.isFalse(this.mailcheck.cache['blabla.com']);
         }
-
     }
 });
 
-buster.testCase("mailcheck.mootools levenstein tests", {
+buster.testCase("mootools.mailcheck cache tests", {
+    setUp: function () {
+        this.mailcheck = new Mailcheck(new Element("input#email"), {
+            method: "distance"
+        });
+    },
+
+    "Expect cache to store look-up for faster future reference": function() {
+        this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
+        this.mailcheck.suggest();
+        buster.assert.equals(this.mailcheck.cache['gnail.com'], 'gmail.com');
+    },
+
+    "Expect cache to store look-up failures for faster future reference": function() {
+        this.mailcheck.element.set("value", "\"foo@bar\"@blabla.com");
+        this.mailcheck.suggest();
+        buster.assert.isFalse(this.mailcheck.cache['blabla.com']);
+    },
+
+    "Expect a new instance of the class to benefit from existing look-up cache": function() {
+        this.mailcheck.element.set("value", "test@gnail.com");
+        this.mailcheck.suggest();
+        var newInstance = new Mailcheck(new Element("input#email2"), {
+            method: "distance"
+        });
+        buster.assert.equals(this.mailcheck.cache['gnail.com'], newInstance.cache['gnail.com']);
+    }
+});
+
+buster.testCase("mootools.mailcheck levenstein tests", {
     setUp: function () {
         this.mailcheck = new Mailcheck(new Element("input#email"), {
             method: "levenstein"
@@ -201,19 +217,6 @@ buster.testCase("mailcheck.mootools levenstein tests", {
         "Expect obscure RFC compatible emails like \"foo@bar\"@gnail.com to produce a valid suggestion": function() {
             this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
             buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
-        },
-
-        "Expect cache to store look-up for faster future reference": function() {
-            this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
-            this.mailcheck.suggest();
-            buster.assert.equals(this.mailcheck.cache['gnail.com'], 'gmail.com');
-        },
-
-        "Expect cache to store look-up failures for faster future reference": function() {
-            this.mailcheck.element.set("value", "\"foo@bar\"@blabla.com");
-            this.mailcheck.suggest();
-            buster.assert.isFalse(this.mailcheck.cache['blabla.com']);
         }
-
     }
 });
