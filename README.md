@@ -3,7 +3,8 @@ mootools.mailcheck.js
 
 A port of a jQuery plugin that suggests a right domain when your users misspell it in an email address.
 
-Entirely rewritten by Dimitar Christoff ([@D_mitar](http://twitter.com/D_mitar)) [![endorse](http://api.coderwall.com/dimitarchristoff/endorsecount.png)](http://coderwall.com/dimitarchristoff)
+Entirely rewritten by Dimitar Christoff ([@D_mitar](http://twitter.com/D_mitar))
+[![endorse](http://api.coderwall.com/dimitarchristoff/endorsecount.png)](http://coderwall.com/dimitarchristoff)
 
 What does it do?
 ----------------
