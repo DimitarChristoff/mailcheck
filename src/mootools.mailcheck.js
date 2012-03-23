@@ -82,7 +82,8 @@
                 'yahoo.com',
                 'ymail.com'
             ],
-            threshold: 2
+            threshold: 2,
+            method: "distance"
         },
 
         cache: {},
@@ -126,7 +127,7 @@
 
             for (;i < len; ++i) {
                 if (domain === domains[i]) return false
-                dist = String.distance(domain, domains[i])
+                dist = String[this.options.method](domain, domains[i])
                 dist < minDist && (minDist = dist) && (closestDomain = domains[i])
             }
 

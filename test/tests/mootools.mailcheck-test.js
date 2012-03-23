@@ -24,9 +24,35 @@ buster.testCase("String.distance tests", {
     },
 
     "Expect distance between two unrelated strings to be length of base string": function() {
-        buster.assert.equals(String.distance(this.string, this.foofar), this.string.length);
+        buster.assert.equals(String.distance(this.string, this.toofar), this.string.length);
     }
 });
+
+buster.testCase("String.levenstein tests", {
+    setUp: function() {
+        this.string = "gmail";
+        this.distance1 = "gnail";
+        this.distance2 = "gnails";
+        this.toofar = "queen";
+    },
+
+    "Expect distance between two equal strings to be 0": function() {
+        buster.assert.equals(String.levenstein(this.string, this.string), 0);
+    },
+
+    "Expect distance between two strings with 1 typo to be 1": function() {
+        buster.assert.equals(String.levenstein(this.string, this.distance1), 1);
+    },
+
+    "Expect distance between two strings with 1 typo and 1 char difference to be 2": function() {
+        buster.assert.equals(String.levenstein(this.string, this.distance2), 2);
+    },
+
+    "Expect distance between two unrelated strings to be length of base string": function() {
+        buster.assert.equals(String.levenstein(this.string, this.toofar), this.string.length);
+    }
+});
+
 
 buster.testCase("mailcheck.mootools tests", {
     setUp: function () {

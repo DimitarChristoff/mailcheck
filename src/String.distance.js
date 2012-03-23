@@ -24,7 +24,7 @@
 
     String.implement({
         distance: function(s2) {
-
+            // sift3, returns crap in IE7
             var s1 = String(this),
                 c = 0,
                 offset1 = 0,
@@ -66,6 +66,29 @@
                 c++;
             }
             return (s1.length + s2.length) / 2 - lcs
+        },
+
+        levenstein: function(str2) {
+            // distance by levenstein, seems more reliable
+            str2 = str2.split("")
+            var str1 = String(this).split(""),
+                distance = [],
+                l = str1.length,
+                m = str2.length,
+                i,
+                j
+
+            for(i = 0; i <= l; i++)
+                distance[i] = [i]
+
+            for(j = 0; j <= m; j++)
+                distance[0][j] = j
+
+            for(i = 1; i <= l; i++)
+                for(j = 1; j <= m; j++)
+                    distance[i][j] = Math.min(distance[i-1][j]+1, distance[i][j-1]+1, distance[i-1][j-1]+((str1[i-1]==str2[j-1])?0:1))
+
+            return distance[l][m]
         }
     })
 
