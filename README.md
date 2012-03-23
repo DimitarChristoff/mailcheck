@@ -90,9 +90,8 @@ document.id("email").addEvent("change", function() {
 
 Methodology
 -----------
-Mailcheck currently supports the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/).
-
-As an alternative to the `String.distance` exported by `String.distance.js`, you can use `String.levenstein`, though the results may vary slightly. Levenstein may be slightly slower but it works in IE6/7 whereas sift3 can produce some really ill-advised suggestions.
+Mailcheck currently supports the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/) and
+`String.levenstein`, though the results may vary slightly. Levenstein is now the default as a more reliable result.
 
 Tests
 -----
