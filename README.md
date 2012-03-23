@@ -48,7 +48,8 @@ else {
 // it can create an instance on the fly for you
 var mailcheck = new Mailcheck(, {
     domains: ["hotmail.com", "gmail.com", "aol.com"],
-    threshold: 2
+    threshold: 2,
+    method: 'distance' // sift3 or 'levenstein' (default)
 });
 
 document.id("email").addEvent("change", function() {
@@ -89,9 +90,9 @@ document.id("email").addEvent("change", function() {
 
 Methodology
 -----------
-Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/).
+Mailcheck currently supports the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/).
 
-As an alternative to the `String.distance` exported by `String.distance.js`, you can use [String.levenstein by thinkphp](http://mootools.net/forge/p/string_levenshtein), though the results may vary slightly.
+As an alternative to the `String.distance` exported by `String.distance.js`, you can use `String.levenstein`, though the results may vary slightly. Levenstein may be slightly slower but it works in IE6/7 whereas sift3 can produce some really ill-advised suggestions.
 
 Tests
 -----
