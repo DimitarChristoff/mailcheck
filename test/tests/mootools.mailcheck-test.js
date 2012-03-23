@@ -54,7 +54,7 @@ buster.testCase("String.levenstein tests", {
 });
 
 
-buster.testCase("mailcheck.mootools tests", {
+buster.testCase("mailcheck.mootools distance tests", {
     setUp: function () {
         this.mailcheck = new Mailcheck(new Element("input#email"));
     },
@@ -131,6 +131,87 @@ buster.testCase("mailcheck.mootools tests", {
             buster.assert.isFalse(this.mailcheck.cache['blabla.com']);
         }
 
+    }
+});
+
+buster.testCase("mailcheck.mootools levenstein tests", {
+    setUp: function () {
+        this.mailcheck = new Mailcheck(new Element("input#email"), {
+            method: "levenstein"
+        });
+    },
+
+    "Initial object >": {
+        "Expect instance to be created": function() {
+            buster.assert.isTrue(instanceOf(this.mailcheck, Mailcheck));
+        },
+
+        "Expect element to be valid": function() {
+            buster.assert.equals(this.mailcheck.element.get("id"), "email");
+        }
+    },
+
+    "Working with emails >": {
+        setUp: function() {
+            this.mailcheck.setOptions({
+                threshold: 2
+            });
+        },
+
+        "Expect an empty string not to produce results": function() {
+            this.mailcheck.element.set("value", "");
+            buster.assert.isFalse(this.mailcheck.suggest());
+        },
+
+        "Expect an incomplete email address w/o a domain part not to produce a result": function() {
+            this.mailcheck.element.set("value", "gmail.com");
+            buster.assert.isFalse(this.mailcheck.suggest());
+        },
+
+        "Expect a recognised domain not to produce a suggestion (gmail.com)": function() {
+            this.mailcheck.element.set("value", "test@gmail.com");
+            buster.assert.isFalse(this.mailcheck.suggest());
+        },
+
+        "Expect a typo in domain to produce a suggestion (gnail.com -> gmail.com)": function() {
+            this.mailcheck.element.set("value", "test@gnail.com");
+            buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
+        },
+
+        "Expect a typo in domain NOT to produce a suggestion with default threshold of 2 (gnails.con -> gmail.com)": function() {
+            this.mailcheck.element.set("value", "test@gnails.con");
+            buster.refute.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
+        },
+
+        "Expect a typo in domain to produce a suggestion with custom threshold of 3 (gmail.org -> gmail.com)": function() {
+            this.mailcheck.setOptions({
+                threshold: 3
+            });
+            this.mailcheck.element.set("value", "test@gmail.org");
+            buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
+        },
+
+        "Expect uppercase user input not to matter to suggestions": function() {
+            this.mailcheck.element.set("value", "TEST@HOTNAIL.COM");
+            buster.assert.equals(this.mailcheck.suggest()['domain'], 'hotmail.com');
+        },
+
+        "Expect obscure RFC compatible emails like \"foo@bar\"@gnail.com to produce a valid suggestion": function() {
+            this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
+            buster.assert.equals(this.mailcheck.suggest()['domain'], 'gmail.com');
+        },
+
+        "Expect cache to store look-up for faster future reference": function() {
+            this.mailcheck.element.set("value", "\"foo@bar\"@gnail.com");
+            this.mailcheck.suggest();
+            buster.assert.equals(this.mailcheck.cache['gnail.com'], 'gmail.com');
+        },
+
+        "Expect cache to store look-up failures for faster future reference": function() {
+            this.mailcheck.element.set("value", "\"foo@bar\"@blabla.com");
+            this.mailcheck.suggest();
+            buster.assert.isFalse(this.mailcheck.cache['blabla.com']);
+        }
 
     }
 });
