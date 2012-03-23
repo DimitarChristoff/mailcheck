@@ -56,7 +56,9 @@ buster.testCase("String.levenstein tests", {
 
 buster.testCase("mailcheck.mootools distance tests", {
     setUp: function () {
-        this.mailcheck = new Mailcheck(new Element("input#email"));
+        this.mailcheck = new Mailcheck(new Element("input#email"), {
+            method: "distance"
+        });
     },
 
     "Initial object >": {
