@@ -24,7 +24,7 @@ Once you have captured your target browsers, just run:
 
 Standalone testing via `buster test` w/o browser capture is not supported yet, though you could probably try jsdom - edit buster.js config and give it a go. Also, you'd need the server only version of mootools.
 
-**nb** please note that when in capture mode via `buster server`, IE7 and IE8 will fire an exception - which is to do with lack of `Object.create`, referenced in one of buster's dependencies `bundle.js`. Having said that, the tests will run just fine and produce a result like this in your console:
+**nb** please note that when in capture mode via `buster server`, IE7 and IE8 will fire an exception - which is to do with lack of `Object.create`, referenced in one of buster's dependencies `bundle.js`. As a work-around, an es5-shim has been provided that makes tests run in IE7/8 as well.
 
 ```sh
 dchristoff@Dimitars-iMac:~/projects/mailcheck (master):
@@ -32,11 +32,12 @@ dchristoff@Dimitars-iMac:~/projects/mailcheck (master):
 buster-server running on http://localhost:1111
 dchristoff@Dimitars-iMac:~/projects/mailcheck (master):
 > buster test
-Uncaught exception: Object expected
-Chrome 17.0.963.83 OS X:       ................
-Internet Explorer 8.0 Windows:
-Firefox 13.0a2 OS X:           ................
-4 test cases, 32 tests, 32 assertions, 0 failures, 0 errors, 0 timeouts
+Internet Explorer 7.0 Windows: .FFF..........FFFFFF............
+Internet Explorer 8.0 Windows: ................................
+Internet Explorer 9.0 Windows: ................................
+Firefox 13.0a2 OS X:           ................................
+Chrome 17.0.963.83 OS X:       ................................
+20 test cases, 160 tests, 160 assertions, 9 failures, 0 errors, 0 timeouts
 ```
 
-As you can see, the uncaught exception skips testing in IE8, though I assure you the plugin itself is fine and if you capture IE9, it also is fine.
+Even so, the sif3 method fails in IE7 - hence our recommendation to use levenstein.
