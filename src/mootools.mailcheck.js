@@ -84,7 +84,7 @@
             ],
             threshold: 2,
             // check String.distance.js - supported: 'distance' (sift3, issues in IE6/7), 'levenstein' (slower but consistent)
-            method: "distance"
+            method: 'levenstein'
         },
 
         cache: {},
