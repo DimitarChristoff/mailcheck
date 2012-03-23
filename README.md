@@ -79,7 +79,7 @@ Methodology
 -----------
 Mailcheck currently uses the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/).
 
-As an alternative to the `String.distance` exported by `String.distance.js`, you can use [String.levenstein](http://mootools.net/forge/p/string_levenshtein), though the results may vary slightly.
+As an alternative to the `String.distance` exported by `String.distance.js`, you can use [String.levenstein by thinkphp](http://mootools.net/forge/p/string_levenshtein), though the results may vary slightly.
 
 Tests
 -----
@@ -102,14 +102,15 @@ Once you have captured your target browsers, just run:
 
     # buster test
 
-Standalone testing w/o browser capture is not supported yet, though you could probably try jsdom - edit buster.js config and give it a go. Also, you'd need the server only version of mootools.
+More details on testing in `the tests/README.md`, including examples.
 
-Original Author
----------------
+Credits
+-------
 
-Derrick Ko ([@derrickko](http://twitter.com/derrickko))
+Original plugin / idea by Derrick Ko ([@derrickko](http://twitter.com/derrickko))
+This mootools port entirely rewritten by Dimitar Christoff ([@D_mitar](http://twitter.com/D_mitar))
 
 License
 -------
 
-Licensed under the MIT License.
+Licensed under the MIT License. You are not allowed to (use mailcheck for evil)[http://www.youtube.com/watch?v=-hCimLnIsDA]
