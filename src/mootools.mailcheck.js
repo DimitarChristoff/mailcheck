@@ -26,6 +26,9 @@
 
 !function() {
 
+    // global cache for all instances
+    var cache = {}
+
     var Mailcheck = this.Mailcheck = new Class({
 
         Implements: [Options],
@@ -87,11 +90,10 @@
             method: 'levenstein'
         },
 
-        cache: {},
-
         initialize: function(element, options){
             this.element = document.id(element)
             this.setOptions(options)
+            this.cache = cache
         },
 
         suggest: function(){
