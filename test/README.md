@@ -39,4 +39,4 @@ Firefox 13.0a2 OS X:           ................
 4 test cases, 32 tests, 32 assertions, 0 failures, 0 errors, 0 timeouts
 ```
 
-As you can see, despite of the uncaught exception, the tests run fine in IE8.
+As you can see, the uncaught exception skips testing in IE8, though I assure you the plugin itself is fine and if you capture IE9, it also is fine.
