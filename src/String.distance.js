@@ -14,7 +14,7 @@
  requires:
  - Core/String
 
- provides: String.distance
+ provides: String.sift3, String.levenstein
 
  ...
  */
@@ -23,8 +23,8 @@
     'use strict'
 
     String.implement({
-        distance: function(s2) {
-            // sift3, returns crap in IE7
+        sift3: function(s2) {
+            // sift3 - http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html
             var s1 = String(this),
                 c = 0,
                 offset1 = 0,

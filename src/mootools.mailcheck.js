@@ -86,7 +86,7 @@
                 'ymail.com'
             ],
             threshold: 2,
-            // check String.distance.js - supported: 'distance' (sift3, issues in IE6/7), 'levenstein' (slower but consistent)
+            // check String.distance.js - supported: 'sift3', 'levenstein'
             method: 'levenstein'
         },
 

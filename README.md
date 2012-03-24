@@ -44,10 +44,10 @@ else {
 
 ```javascript
 // it can create an instance on the fly for you
-var mailcheck = new Mailcheck(, {
+var mailcheck = new Mailcheck(document.id('email', {
     domains: ["hotmail.com", "gmail.com", "aol.com"],
     threshold: 2,
-    method: 'distance' // sift3 or 'levenstein' (default)
+    method: 'sift3' // sift3 or 'levenstein' (default)
 });
 
 document.id("email").addEvent("change", function() {
