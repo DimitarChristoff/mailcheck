@@ -3,7 +3,7 @@
 
  name: String.distance
 
- description: provides the distance between a string and another string, based uponhttp://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html
+ description: provides ways of measuring the relative distance between a string and another string
 
  authors: Dimitar Christoff
 
