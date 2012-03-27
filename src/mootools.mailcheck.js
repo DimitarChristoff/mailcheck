@@ -24,12 +24,14 @@
  ...
  */
 
-!function() {
+!function(scope) {
+
+    'use strict'
 
     // global cache for all instances
     var cache = {}
 
-    var Mailcheck = this.Mailcheck = new Class({
+    var Mailcheck = scope.Mailcheck = new Class({
 
         Implements: [Options],
 
@@ -160,5 +162,4 @@
 
     }
 
-
-}()
+}(this)
