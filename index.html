@@ -1,0 +1,190 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Mailcheck</title>
+  <meta name="description" content="Popular email domain spelling suggester / corrector via String distance and an array of known domains. For MooTools">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Mailcheck</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Popular email domain spelling suggester / corrector via String distance and an array of known domains. For MooTools</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/DimitarChristoff/mailcheck/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/DimitarChristoff/mailcheck/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/DimitarChristoff/mailcheck" class="code">fork Mailcheck on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>mootools.mailcheck.js</h1>
+
+<p>A rewrite of the jQuery plugin that suggests a right domain when your users misspell it in an email address.</p>
+
+<p><a href="http://coderwall.com/dimitarchristoff"><img src="http://api.coderwall.com/dimitarchristoff/endorsecount.png" alt="endorse"></a></p>
+
+<h2>What does it do?</h2>
+
+<p>When your user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail.com".</p>
+
+<p><img src="http://github.com/Kicksend/mailcheck/raw/master/doc/example.png?raw=true" alt="diagram"></p>
+
+<p>See it live in action on this jsfiddle <a href="http://jsfiddle.net/dimitar/jSn3e/">here</a>.</p>
+
+<h2>How to use</h2>
+
+<p>This is low level, it works with an element but it does not attach events or handle suggestions.
+You should extend the class to get that behavior or work with the instance.</p>
+
+<p>Get Mootools. Have a text field.</p>
+
+<div class="highlight">
+<pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"dimitar@gogolemail.com"</span> <span class="nt">/&gt;</span>
+</pre>
+</div>
+
+
+<p>Now, attach Mailcheck to the text field. Remember to declare an array of domains you want to check against.</p>
+
+<div class="highlight">
+<pre><span class="c1">// it can create an instance on the fly for you</span>
+<span class="kd">var</span> <span class="nx">suggested</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">id</span><span class="p">(</span><span class="s2">"email"</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="s2">"mailcheck"</span><span class="p">).</span><span class="nx">suggest</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">suggested</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with the object</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// we have nothing!</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<p>...or use a proper class instantiation as part of scripting:</p>
+
+<div class="highlight">
+<pre><span class="c1">// it can create an instance on the fly for you</span>
+<span class="kd">var</span> <span class="nx">mailcheck</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailcheck</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">id</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">domains</span><span class="o">:</span> <span class="p">[</span><span class="s2">"hotmail.com"</span><span class="p">,</span> <span class="s2">"gmail.com"</span><span class="p">,</span> <span class="s2">"aol.com"</span><span class="p">],</span>
+    <span class="nx">threshold</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">method</span><span class="o">:</span> <span class="s1">'sift3'</span> <span class="c1">// sift3 or 'levenstein' (default)</span>
+<span class="p">});</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">id</span><span class="p">(</span><span class="s2">"email"</span><span class="p">).</span><span class="nx">addEvent</span><span class="p">(</span><span class="s2">"change"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">suggested</span> <span class="o">=</span> <span class="nx">mailcheck</span><span class="p">.</span><span class="nx">suggest</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">suggested</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something with the object</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// we have nothing!</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<p>A combination of both for quick scripting:</p>
+
+<div class="highlight">
+<pre><span class="nb">document</span><span class="p">.</span><span class="nx">id</span><span class="p">(</span><span class="s2">"email"</span><span class="p">).</span><span class="nx">addEvent</span><span class="p">(</span><span class="s2">"change"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// create a class instance if it does not exist...</span>
+    <span class="kd">var</span> <span class="nx">suggested</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"mailcheck"</span><span class="p">).</span><span class="nx">suggest</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">suggested</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something with the object</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// we have nothing!</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<p><code>suggested</code> is an object with the following properties:</p>
+
+<pre><code>{
+  user: 'dimitar',               // the address; part before the @ sign
+  domain: 'googlemail.com',      // the suggested domain
+  full: 'dimitar@googlemail.com' // the full suggested email
+}
+</code></pre>
+
+<p><code>false</code> is returned when we don't know what to suggest.</p>
+
+<h2>Methodology</h2>
+
+<p>Mailcheck currently supports the <a href="http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html">sift3</a> string similarity / distance algorithm by <a href="http://siderite.blogspot.com/">Siderite</a> and
+<code>String.levenstein</code>, though the results may vary slightly. Levenstein is now the default as a more reliable result.</p>
+
+<h2>Tests</h2>
+
+<p>Via Buster.js, go to <code>test/index.html</code> to run.</p>
+
+<p>You can also test via node. To install buster:</p>
+
+<pre><code># npm install -g buster
+</code></pre>
+
+<p>To start the static tester:    </p>
+
+<pre><code># buster static
+</code></pre>
+
+<p>To start in capture mode for multiple browsers:</p>
+
+<pre><code># buster server &amp;
+</code></pre>
+
+<p>Once you have captured your target browsers, just run:</p>
+
+<pre><code># buster test
+</code></pre>
+
+<p>More details on testing in <code>the tests/README.md</code>, including examples.</p>
+
+<h2>Credits</h2>
+
+<ul>
+<li>Original plugin / idea by Derrick Ko (<a href="http://twitter.com/derrickko">@derrickko</a>)</li>
+</ul><h2>License</h2>
+
+<p>Licensed under the MIT License. You are not allowed to <a href="http://www.youtube.com/watch?v=-hCimLnIsDA">use mailcheck for evil</a></p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/DimitarChristoff" class="avatar"><img src="https://secure.gravatar.com/avatar/e26464827b005a24cb566e53b0313543?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="48" height="48"/></a> <a href="https://github.com/DimitarChristoff">DimitarChristoff</a> maintains <a href="https://github.com/DimitarChristoff/mailcheck">Mailcheck</a></p>
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/DimitarChristoff/mailcheck/tarball/master" class="tar">tar</a><a href="https://github.com/DimitarChristoff/mailcheck/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
