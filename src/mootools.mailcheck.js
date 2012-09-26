@@ -24,12 +24,12 @@
  ...
  */
 
-!function(scope) {
+(function(scope){
 
-    'use strict'
+    'use strict';
 
     // global cache for all instances
-    var cache = {}
+    var cache = {};
 
     var Mailcheck = scope.Mailcheck = new Class({
 
@@ -93,9 +93,9 @@
         },
 
         initialize: function(element, options){
-            this.element = document.id(element)
-            this.setOptions(options)
-            this.cache = cache
+            this.element = document.id(element);
+            this.setOptions(options);
+            this.cache = cache;
         },
 
         suggest: function(){
@@ -103,21 +103,21 @@
                 parts = value.split('@'),
                 closestDomain,
                 userBit,
-                domainBit
+                domainBit;
 
             if (parts.length < 2)
-                return false
+                return false;
 
-            domainBit = parts.pop().toLowerCase()
-            userBit = parts.join('@')
+            domainBit = parts.pop().toLowerCase();
+            userBit = parts.join('@');
 
-            closestDomain = typeof this.cache[domainBit] !== 'undefined' ? this.cache[domainBit] : this.findClosestDomain(domainBit)
+            closestDomain = typeof this.cache[domainBit] !== 'undefined' ? this.cache[domainBit] : this.findClosestDomain(domainBit);
 
             return (closestDomain) ? {
                 user: userBit,
                 domain: closestDomain,
                 full: [userBit, closestDomain].join('@')
-            } : false
+            } : false;
         },
 
         findClosestDomain: function(domain){
@@ -126,40 +126,40 @@
                 closestDomain,
                 domains = this.options.domains,
                 i = 0,
-                len = domains.length
+                len = domains.length;
 
-            this.cache[domain] = false
+            this.cache[domain] = false;
 
             for (;i < len; ++i) {
-                if (domain === domains[i]) return false
-                dist = String[this.options.method](domain, domains[i])
-                dist < minDist && (minDist = dist) && (closestDomain = domains[i])
+                if (domain === domains[i]) return false;
+                dist = String[this.options.method](domain, domains[i]);
+                dist < minDist && (minDist = dist) && (closestDomain = domains[i]);
             }
 
             if (minDist <= this.options.threshold && closestDomain)
-                this.cache[domain] = closestDomain
+                this.cache[domain] = closestDomain;
 
-            return this.cache[domain]
+            return this.cache[domain];
         }
 
-    })
+    });
 
     Element.Properties.mailcheck = {
 
         set: function(options){
             this.get('mailcheck').setOptions(options);
-            return this
+            return this;
         },
 
         get: function(){
-            var mailcheck = this.retrieve('mailcheck')
+            var mailcheck = this.retrieve('mailcheck');
             if (!mailcheck) {
-                mailcheck = new Mailcheck(this)
-                this.store('mailcheck', mailcheck)
+                mailcheck = new Mailcheck(this);
+                this.store('mailcheck', mailcheck);
             }
-            return mailcheck
+            return mailcheck;
         }
 
     }
 
-}(this)
+}(this));
