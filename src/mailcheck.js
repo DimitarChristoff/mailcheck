@@ -169,7 +169,7 @@ provides: Mailcheck
 
 	if (typeof define === 'function' && define.amd){
 		// require string-distance methods to have loaded on the prototype
-		define(['./string-distance'], wrap);
+		define(['string-distance'], wrap);
 	}
 	else {
 		// assume no requirejs and that string methods are loaded already
