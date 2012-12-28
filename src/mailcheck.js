@@ -98,6 +98,8 @@ provides: Mailcheck
 			initialize: function(element, options){
 				this.element = document.id(element);
 				this.setOptions(options);
+				// expose cache locally to instance
+				this.cache = cache;
 			},
 
 			suggest: function(){
