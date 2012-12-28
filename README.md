@@ -1,4 +1,4 @@
-mootools.mailcheck.js
+mailcheck.js
 =====================
 
 A rewrite of the jQuery plugin that suggests a right domain when your users misspell it in an email address.
@@ -8,17 +8,17 @@ A rewrite of the jQuery plugin that suggests a right domain when your users miss
 What does it do?
 ----------------
 
-When your user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail.com".
+When a user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail.com".
 
 ![diagram](http://github.com/Kicksend/mailcheck/raw/master/doc/example.png?raw=true)
 
-See it live in action on this jsfiddle [here](http://jsfiddle.net/dimitar/jSn3e/).
+This works based upon a pre-populated array of popular domain names. See it live in action on this jsfiddle [here](http://jsfiddle.net/dimitar/jSn3e/).
 
 
 How to use
 ----------
 
-This is low level, it works with an element but it does not attach events or handle suggestions.
+This plugin has been created to work at a lower level, it works with an element but it does not attach events or handle suggestions.
 You should extend the class to get that behavior or work with the instance.
 
 Get Mootools. Have a text field.
@@ -30,7 +30,7 @@ Get Mootools. Have a text field.
 Now, attach Mailcheck to the text field. Remember to declare an array of domains you want to check against.
 
 ```javascript
-// it can create an instance on the fly for you
+// it can create an instance on the fly for you based upon a special Element getter
 var suggested = document.id("email").get("mailcheck").suggest();
 if (suggested) {
     // do something with the object
@@ -45,11 +45,12 @@ else {
 ```javascript
 // it can create an instance on the fly for you
 var mailcheck = new Mailcheck(document.id('email', {
-    domains: ["hotmail.com", "gmail.com", "aol.com"],
+    domains: ['hotmail.com', 'gmail.com', 'aol.com'],
     threshold: 2,
     method: 'sift3' // sift3 or 'levenstein' (default)
 });
 
+// add a change event to the field
 document.id("email").addEvent("change", function() {
     var suggested = mailcheck.suggest();
     if (suggested) {
@@ -90,6 +91,22 @@ Methodology
 -----------
 Mailcheck currently supports the [sift3](http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html) string similarity / distance algorithm by [Siderite](http://siderite.blogspot.com/) and
 `String.levenstein`, though the results may vary slightly. Levenstein is now the default as a more reliable result.
+
+Creating a domain list
+----------------------
+Dependent on where you are, the list of domains will differ. If the default list of corrected domains does not work for you,
+you can use this sample mysql query to extract your most common domain names from your user database:
+
+```mysql
+SELECT
+	substring_index(email, '@', -1), COUNT(*) as c
+FROM users
+ 	where email != ''
+GROUP BY
+ 	substring_index(email, '@', -1)
+ORDER BY
+	c DESC limit 50;
+```
 
 Tests
 -----
