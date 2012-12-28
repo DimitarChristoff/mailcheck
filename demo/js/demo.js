@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: '../src'
+	baseUrl: '../Source'
 });
 
 require(['mailcheck'], function(Mailcheck){
