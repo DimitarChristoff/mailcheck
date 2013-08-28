@@ -1,0 +1,13 @@
+{
+  "name": "mailcheck",
+  "version": "0.0.2",
+  "main": ["Source/mailcheck.js", "Source/string-distance.js"],
+  "ignore": [
+    "package.yml",
+    "node_modules",
+    "components",
+    "test",
+    "demo",
+    "bower.json"
+  ]
+}
