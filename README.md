@@ -10,7 +10,7 @@ What does it do?
 
 When a user types in "user@hotnail.con", Mailcheck will suggest "user@hotmail.com".
 
-![diagram](http://github.com/Kicksend/mailcheck/raw/master/doc/example.png?raw=true)
+![diagram](https://raw.githubusercontent.com/mailcheck/mailcheck/master/doc/example.png)
 
 This works based upon a pre-populated array of popular domain names. See it live in action on this jsfiddle [here](http://jsfiddle.net/dimitar/jSn3e/).
 
